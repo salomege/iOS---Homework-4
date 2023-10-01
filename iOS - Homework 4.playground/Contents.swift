@@ -5,11 +5,11 @@ var greeting = "Hello, playground"
 //1
 
 func factorialValue(number: Int) -> Int{
-   if number == 0{
-      return 1
-   } else {
-      return number * factorialValue(number:number-1)
-   }
+    if number == 0{
+        return 1
+    } else {
+        return number * factorialValue(number:number-1)
+    }
 }
 var value = 4
 var output = factorialValue(number: value)
@@ -22,7 +22,7 @@ func generateFibonacciSequence (upTo n: Int) -> [Int] {
     var sequence = [0, 1]
     while sequence.count < n {
         let nextNumber =
-        sequence[sequence.count - 1] + 
+        sequence[sequence.count - 1] +
         sequence[sequence.count - 2]
         sequence.append(nextNumber)
     }
@@ -32,37 +32,42 @@ let fibonacciSequance = generateFibonacciSequence (upTo: 20)
 print (fibonacciSequance)
 
 //3
-/*func isPalindrome(_ str: String) -> Bool {
-    let length = str.count
-    for i in 0..<length/2 {
-        let frontIndex = str.index(str.startIndex, offsetBy: i)
-        let backIndex = str.index(str.endIndex, offsetBy: -i - 1)
-        if str[frontIndex] != str[backIndex] {
+func isPalindrome(_ userString: String) -> Bool {
+    
+    let characters = Array(userString.lowercased())
+    var initialIndex = 0
+    var finalIndex = characters.count - 1
+    while initialIndex < finalIndex {
+        if characters[initialIndex] != characters[finalIndex] {
             return false
         }
-    }*/
-    
-    //4
-    
-    func squareNumbersInArray(numbers: [Int]) -> [Int] {
-        var squaredNumbers = [Int]()
-        
-        for number in numbers {
-            let squared = number * number
-            squaredNumbers.append(squared)
-        }
-        
-        return squaredNumbers
+        initialIndex += 1
+        finalIndex -= 1
     }
+    return true
+}
 
-    let numbers = [1, 2, 3]
-    let squaredNumbers = squareNumbersInArray(numbers: numbers)
-    print(squaredNumbers)
+//4
+
+func squareNumbersInArray(numbers: [Int]) -> [Int] {
+    var squaredNumbers = [Int]()
+    
+    for number in numbers {
+        let squared = number * number
+        squaredNumbers.append(squared)
+    }
+    
+    return squaredNumbers
+}
+
+let numbers = [1, 2, 3]
+let squaredNumbers = squareNumbersInArray(numbers: numbers)
+print(squaredNumbers)
 
 //5
 func wordFrequencyInString(_ inputString: String) -> [String: Int] {
     var wordFrequency = [String: Int]()
-        let words = inputString.split(separator: " ")
+    let words = inputString.split(separator: " ")
     
     for word in words {
         let wordStr = String(word)
@@ -90,9 +95,9 @@ let decimalToBinary: (Int) -> String = {
         binary = "\(reminder) + binary"
         num = num / 2
         
-}
-return binary
-
+    }
+    return binary
+    
 }
 let decimalNumber = 20
 print (decimalToBinary(decimalNumber))
@@ -110,4 +115,27 @@ let increasedNumbers = intNums.map { $0 * 10 }
 print(increasedNumbers)
 
 //9
+func sumArrayAfterDelay(_ numbers: [Int], completion: @escaping (Int) -> Void) {
+    DispatchQueue.global().asyncAfter(deadline: .now() + 3.0) {
+        let sum = numbers.reduce(0, +)
+        completion(sum)
+    }
+}
+let ages = [25, 20, 30, 35]
+sumArrayAfterDelay(ages){
+    sum in print(sum)
+}
 
+//10
+
+func filterOddIndexedElements(_ inputArray: [String]) -> [String] {
+    let filteredArray = inputArray.enumerated().compactMap { (index, element) in
+        return index % 2 != 0 ? element : nil
+    }
+    return filteredArray
+}
+
+let stringArray = ["Apple", "Banana", "Cherry", "Orange"]
+
+let resultArray = filterOddIndexedElements(stringArray)
+print(resultArray)
