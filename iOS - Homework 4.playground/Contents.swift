@@ -61,7 +61,7 @@ func squareNumbersInArray(numbers: [Int]) -> [Int] {
 }
 
 let numbers = [1, 2, 3]
-let squaredNumbers = squareNumbersInArray(numbers: numbers)
+let squaredNumbers = squareNumbersInArray(numbers:numbers)
 print(squaredNumbers)
 
 //5
